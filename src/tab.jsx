@@ -11,10 +11,11 @@ export class tab extends Component {
   }
   itemClick(index) {
     this.setState({ currentIndex: index });
+    this.props.tabClick(index);
   }
   render() {
     const { currentIndex } = this.state;
-    const { titles } = this.props;
+    const { titles, itemType } = this.props;
     return (
       <div className="tab-control">
         {titles.map((item, index) => {
@@ -24,7 +25,7 @@ export class tab extends Component {
               onClick={() => this.itemClick(index)}
               className={`item ${currentIndex == index ? "active" : ""}`}
             >
-              <span>{item}</span>
+              {itemType(item)}
             </div>
           );
         })}
